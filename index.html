@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Muhammet Furkan Yılmaz Portfolyo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Figtree:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  /* Tek tema: render'lar koyu zeminde en iyi görünür. Unreal gün batımından sıcak amber vurgu. */
+  --bg:#141210;
+  --surface:#1e1b18;
+  --line:#34302b;
+  --text:#f1ece5;
+  --muted:#a59d93;
+  --accent:#e9a24e;
+  --display:"Bricolage Grotesque", "Arial Narrow", system-ui, sans-serif;
+  --body:"Figtree", "Segoe UI", system-ui, sans-serif;
+  --wrap:1240px;
+  /* Yerleşim: solda isim ve künye, sağda reel; altında 3 sütunlu iş ızgarası, her iş kendi sayfasında açılır */
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--bg);color:var(--text);font:400 17px/1.6 var(--body);-webkit-font-smoothing:antialiased}
+img,video{max-width:100%;display:block}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:4px}
+.wrap{max-width:var(--wrap);margin:0 auto;padding:0 clamp(16px,4vw,40px)}
+h1,h2,h3{font-family:var(--display);text-wrap:balance;margin:0;line-height:1.05}
+.eyebrow{font:600 13px/1 var(--body);letter-spacing:.12em;text-transform:uppercase;color:var(--accent)}
+
+header.top{position:sticky;top:0;z-index:5;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+header.top .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;height:64px}
+.brand{font:700 18px/1 var(--display);text-decoration:none;letter-spacing:-.01em}
+.brand span{color:var(--accent)}
+nav{display:flex;gap:clamp(14px,3vw,32px)}
+nav a{text-decoration:none;color:var(--muted);font-weight:500;font-size:15px}
+nav a:hover,nav a[aria-current="true"]{color:var(--text)}
+
+.hero{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:clamp(24px,4vw,56px);align-items:center;padding:clamp(32px,6vw,72px) 0 clamp(40px,6vw,80px)}
+.hero h1{font-size:clamp(44px,6.4vw,88px);font-weight:800;letter-spacing:-.03em}
+.hero h1 .last{color:var(--accent)}
+.hero .role{font:500 clamp(19px,1.8vw,23px)/1.3 var(--display);margin:22px 0 14px}
+.hero p{color:var(--muted);max-width:44ch;margin:0 0 26px}
+.chips{display:flex;flex-wrap:wrap;gap:8px;padding:0;margin:0 0 28px;list-style:none}
+.chips li{border:1px solid var(--line);border-radius:999px;padding:5px 12px;font-size:14px;color:var(--muted)}
+.btn{display:inline-flex;align-items:center;gap:8px;background:var(--accent);color:#1a1209;font-weight:600;text-decoration:none;padding:12px 20px;border-radius:8px;border:0;font-size:16px;cursor:pointer;font-family:var(--body)}
+.btn.ghost{background:transparent;color:var(--text);border:1px solid var(--line)}
+.btn:hover{filter:brightness(1.08)}
+.actions{display:flex;flex-wrap:wrap;gap:12px}
+.reel{position:relative;border-radius:10px;overflow:hidden;background:#000;border:1px solid var(--line);aspect-ratio:16/9}
+.reel video{width:100%;height:100%;object-fit:cover}
+.reel .tag{position:absolute;left:14px;top:14px;background:rgba(0,0,0,.6);padding:5px 10px;border-radius:6px;font-size:13px;font-weight:600;letter-spacing:.06em;text-transform:uppercase}
+
+section.block{padding:clamp(48px,7vw,96px) 0;border-top:1px solid var(--line)}
+.head{display:flex;justify-content:space-between;align-items:end;gap:24px;flex-wrap:wrap;margin-bottom:32px}
+.head h2{font-size:clamp(32px,4vw,52px);letter-spacing:-.02em;margin-top:12px}
+.head p{color:var(--muted);max-width:46ch;margin:0}
+
+.grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(16px,2vw,28px)}
+.card{display:flex;flex-direction:column;gap:14px;text-decoration:none}
+.card .thumb{aspect-ratio:16/9;border-radius:8px;overflow:hidden;background:var(--surface);border:1px solid var(--line)}
+.card img{width:100%;height:100%;object-fit:cover;transition:transform .5s ease}
+.card:hover img{transform:scale(1.04)}
+.card h3{font-size:20px;font-weight:700;letter-spacing:-.01em}
+.card .meta{color:var(--muted);font-size:15px;margin-top:4px}
+
+.about{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:clamp(28px,5vw,72px)}
+.about .lead{font:500 clamp(22px,2.4vw,30px)/1.35 var(--display);letter-spacing:-.01em;margin:16px 0 24px}
+.about p{color:var(--muted);max-width:62ch}
+.facts{display:grid;gap:26px;align-content:start}
+.fact h3{font:600 13px/1 var(--body);letter-spacing:.12em;text-transform:uppercase;color:var(--accent);margin-bottom:10px}
+.fact p,.fact li{margin:0;color:var(--text);font-size:16px}
+.fact ul{margin:0;padding:0;list-style:none;display:grid;gap:6px}
+.fact .sub{color:var(--muted);font-size:15px}
+
+.contact{display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap}
+.contact h2{font-size:clamp(34px,5vw,64px);letter-spacing:-.02em}
+.mail{font:600 clamp(18px,2vw,24px)/1.2 var(--display);margin-top:12px;color:var(--accent);word-break:break-all}
+.copied{color:var(--muted);font-size:14px;min-height:1.2em;margin-top:6px}
+footer{padding:28px 0 40px;color:var(--muted);font-size:14px;border-top:1px solid var(--line)}
+
+/* Proje sayfası */
+#project{display:none;padding:clamp(28px,5vw,56px) 0 80px}
+body.viewing #home{display:none}
+body.viewing #project{display:block}
+.back{display:inline-flex;gap:8px;align-items:center;color:var(--muted);text-decoration:none;font-weight:500;margin-bottom:28px}
+.back:hover{color:var(--text)}
+.p-head{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:clamp(24px,4vw,56px);margin-bottom:40px;align-items:start}
+.p-head h1{font-size:clamp(38px,5.4vw,72px);font-weight:800;letter-spacing:-.03em;margin-top:14px}
+.p-head p{color:var(--muted);margin:0 0 14px;max-width:60ch}
+.p-meta{display:grid;grid-template-columns:auto 1fr;gap:8px 18px;font-size:15px;margin:0}
+.p-meta dt{color:var(--muted)}
+.p-meta dd{margin:0}
+.note{border-left:3px solid var(--accent);padding:10px 16px;background:var(--surface);border-radius:0 6px 6px 0;color:var(--muted);font-size:15px;margin-top:18px}
+.media{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(12px,1.6vw,20px)}
+.media figure{margin:0;background:var(--surface);border:1px solid var(--line);border-radius:8px;overflow:hidden}
+.media figure.full{grid-column:1/-1}
+.media img,.media video{width:100%;height:auto}
+.media button{all:unset;cursor:zoom-in;display:block}
+.media button:focus-visible{outline:2px solid var(--accent);outline-offset:-2px}
+.media figcaption{padding:10px 14px;font-size:14px;color:var(--muted)}
+.media.posts{grid-template-columns:repeat(4,minmax(0,1fr))}
+.next{margin-top:56px;padding-top:28px;border-top:1px solid var(--line);display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.next a{text-decoration:none}
+.next .k{color:var(--muted);font-size:14px;display:block}
+.next .t{font:700 22px/1.2 var(--display)}
+
+dialog{border:0;padding:0;background:transparent;max-width:min(1600px,94vw);max-height:92vh}
+dialog::backdrop{background:rgba(10,9,8,.92)}
+dialog img{max-height:88vh;width:auto;margin:auto;border-radius:6px}
+dialog .close{position:fixed;top:16px;right:20px;background:var(--surface);color:var(--text);border:1px solid var(--line);border-radius:8px;padding:8px 14px;font:600 15px var(--body);cursor:pointer}
+
+@media (max-width:900px){
+  .hero,.about,.p-head{grid-template-columns:1fr}
+  .grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .media.posts{grid-template-columns:repeat(3,minmax(0,1fr))}
+}
+@media (max-width:560px){
+  .grid,.media{grid-template-columns:1fr}
+  .media.posts{grid-template-columns:repeat(2,minmax(0,1fr))}
+  nav a.hide-sm{display:none}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="#">Furkan Yılmaz<span>.</span></a>
+    <nav aria-label="Ana menü">
+      <a href="#isler">İşler</a>
+      <a href="#hakkimda">Hakkımda</a>
+      <a href="#iletisim">İletişim</a>
+    </nav>
+  </div>
+</header>
+
+<main id="home">
+  <div class="wrap">
+    <section class="hero" aria-label="Giriş">
+      <div>
+        <div class="eyebrow">Portfolyo 2026</div>
+        <h1>Muhammet<br>Furkan <span class="last">Yılmaz</span></h1>
+        <div class="role">3D Artist &amp; Motion Designer</div>
+        <p>Unreal Engine'de ortam tasarımı, 3D sahne kurulumu ve karakter animasyonu. Üsküdar Üniversitesi Çizgi Film ve Animasyon öğrencisi, İstanbul.</p>
+        <ul class="chips" aria-label="Kullandığım programlar">
+          <li>Maya</li><li>ZBrush</li><li>Substance Painter</li><li>Unreal Engine</li><li>After Effects</li><li>Premiere Pro</li>
+        </ul>
+        <div class="actions">
+          <a class="btn" href="#isler">İşleri gör</a>
+          <a class="btn ghost" href="#iletisim">İletişime geç</a>
+        </div>
+      </div>
+      <div class="reel">
+        <video src="media/showreel.mp4" poster="img/showreel-poster.jpg" controls muted playsinline preload="metadata" aria-label="Showreel 2026"></video>
+        <span class="tag">Showreel · 0:44</span>
+      </div>
+    </section>
+  </div>
+
+  <section class="block" id="isler" aria-labelledby="isler-baslik">
+    <div class="wrap">
+      <div class="head">
+        <div><div class="eyebrow">Seçili işler</div><h2 id="isler-baslik">İşler</h2></div>
+        <p>Her işe tıklayınca render'ları, videoları ve kısa üretim notlarını görürsünüz.</p>
+      </div>
+      <div class="grid" id="grid"></div>
+    </div>
+  </section>
+
+  <section class="block" id="hakkimda" aria-labelledby="hakkimda-baslik">
+    <div class="wrap about">
+      <div>
+        <div class="eyebrow">Hakkımda</div>
+        <h2 id="hakkimda-baslik" class="lead">Mekânı, ışığı ve hareketi birlikte düşünen bir 3D sanatçısıyım.</h2>
+        <p>İstanbul'da yaşıyorum ve Üsküdar Üniversitesi Çizgi Film ve Animasyon bölümünde okuyorum. 3D modelleme ve karakter tasarımından sahne kurulumuna, animasyondan post-prodüksiyona kadar üretimin her aşamasında çalışıyorum.</p>
+        <p>Okulun yanında markalar için 3D animasyon, sosyal medya tasarımı ve video kurgu işleri yapıyorum. Freelance projelere ve animasyon stüdyolarında staj ya da ekip pozisyonlarına açığım.</p>
+      </div>
+      <div class="facts">
+        <div class="fact">
+          <h3>Eğitim</h3>
+          <p>Üsküdar Üniversitesi, Çizgi Film ve Animasyon (Lisans)</p>
+          <p class="sub">2023 – 2027, devam ediyor</p>
+        </div>
+        <div class="fact">
+          <h3>Programlar</h3>
+          <ul>
+            <li>3D: Autodesk Maya, ZBrush, Substance Painter, Unreal Engine</li>
+            <li>Post-prodüksiyon: After Effects, Premiere Pro</li>
+            <li>Tasarım: Photoshop, Illustrator</li>
+          </ul>
+        </div>
+        <div class="fact">
+          <h3>Bildiri</h3>
+          <p>Türk Mitolojisi ve Cyberpunk Senteziyle 3D Modelleme ve Animasyon Eğitimi İçin E-Kitap Geliştirilmesi</p>
+          <p class="sub">İletişim Çalışmaları Öğrenci Sempozyumu, Üsküdar Üniversitesi, 11 Haziran 2026</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="iletisim" aria-labelledby="iletisim-baslik">
+    <div class="wrap contact">
+      <div>
+        <div class="eyebrow">İletişim</div>
+        <h2 id="iletisim-baslik">Birlikte çalışalım.</h2>
+        <div class="mail">designed.furkan@gmail.com</div>
+        <div class="copied" id="copied" role="status"></div>
+      </div>
+      <div class="actions">
+        <button class="btn" type="button" id="copy">E-postayı kopyala</button>
+        <a class="btn ghost" href="mailto:designed.furkan@gmail.com">E-posta gönder</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<main id="project" aria-live="polite">
+  <div class="wrap" id="project-body"></div>
+</main>
+
+<footer><div class="wrap">© 2026 Muhammet Furkan Yılmaz · designed.furkan@gmail.com</div></footer>
+
+<dialog id="lightbox" aria-label="Büyük görsel">
+  <button class="close" type="button" id="lb-close">Kapat</button>
+  <img id="lb-img" alt="">
+</dialog>
+
+<script>
+const P = [
+  { id:"orman-kampi", title:"Orman Kampı", kind:"Unreal Engine · Ortam tasarımı", thumb:"img/kapak-orman.jpg", wide:true,
+    text:"Gün batımında, çam ormanı ve kayalıklar arasında iki gözetleme kulübesi. Arazi, bitki örtüsü, kaya yerleşimi ve gün batımı ışığı Unreal Engine'de kuruldu. Sahne farklı kamera açılarından ve obje yakın planlarından incelenebilecek şekilde tasarlandı.",
+    meta:[["Program","Unreal Engine"],["Kapsam","Arazi, bitki örtüsü, ışık, kamera"],["Tür","Ders projesi"]],
+    media:[{img:"img/orman-1.jpg",cap:"Genel plan, gün batımı",full:true},{img:"img/orman-5.jpg",cap:"Kulübeler, alçak açı"},{img:"img/orman-4.jpg",cap:"Kulübe yakın plan"},{img:"img/orman-3.jpg",cap:"Kayalık yamaç"},{img:"img/orman-2.jpg",cap:"Kanyon geçidi"},{img:"img/orman-6.jpg",cap:"Ağaçların arasından kulübe",full:true}] },
+  { id:"ficilar", title:"Fıçılar", kind:"3D sahne · Karakter animasyonu", thumb:"img/kapak-ficilar.jpg",
+    text:"Taş bir mahzende yüzleri olan fıçılar. Ortam, malzemeler ve ışık kurulduktan sonra iki fıçı karakter olarak canlandırıldı: biri zıplayıp yaklaşıyor, diğeri devriliyor.",
+    meta:[["Kapsam","Modelleme, malzeme, ışık, animasyon"],["Tür","Ders projesi"]],
+    media:[{video:"media/ficilar-sahne.mp4",cap:"Sahne turu",full:true},{video:"media/ficilar-animasyon.mp4",cap:"Karakter animasyonu"},{img:"img/ficilar-render.jpg",cap:"Final render"}] },
+  { id:"nezih", title:"Nezih ve Sabun Portalı", kind:"Konsept tasarım · Karakter ve evren", thumb:"img/kapak-nezih.jpg", wide:true,
+    text:"Cleanua adlı temizlik evreninde geçen bir çocuk animasyonu konsepti. Sabun Purusu Nezih, Mikrobiklerin insan dünyasına kir ve plak yaymak için açtığı portalı kapatmak zorunda kalır. Dört karakter, dört mekân, logline, sinopsis ve 16 karelik storyboard hazırlandı. Puruslar açık, parlak ve koruyucu; Mikrobikler lekeli, organik ve mor-zeytin tonlarında.",
+    meta:[["Kapsam","Hikâye, karakter tasarımı, model sheet, ifade varyasyonları, mekân"],["Araçlar","ChatGPT, Gemini (yapay zekâ destekli)"],["Tür","Yapay Zekâ Destekli Konsept Tasarım dersi finali"]],
+    note:"Hikâye, karakterler ve tasarım kararları bana ait. Görseller yapay zekâ araçlarıyla, prompt revizyonları ve seçimlerle üretildi.",
+    media:[{img:"img/nz-tum-karakterler.jpg",cap:"Nezih, Pırıl, Plaxi ve Lekeş, Portal Odası'nda",full:true},
+      {img:"img/nz-nezih.jpg",cap:"Nezih, Sabun Purusu"},{img:"img/nz-piril.jpg",cap:"Pırıl, Ağız Bakım Purusu"},
+      {img:"img/nz-lekes.jpg",cap:"Lekeş, Kir Mikrobiği"},{img:"img/nz-plaxi.jpg",cap:"Plaxi, Plak Mikrobiği"},
+      {img:"img/nz-nezih-model.jpg",cap:"Nezih, model sheet"},{img:"img/nz-nezih-ifade.jpg",cap:"Nezih, ifade sayfası"},
+      {img:"img/nz-piril-model.jpg",cap:"Pırıl, model sheet"},{img:"img/nz-piril-ifade.jpg",cap:"Pırıl, ifade sayfası"},
+      {img:"img/nz-lekes-model.jpg",cap:"Lekeş, model sheet"},{img:"img/nz-lekes-ifade.jpg",cap:"Lekeş, ifade sayfası"},
+      {img:"img/nz-plaxi-model.jpg",cap:"Plaxi, model sheet"},{img:"img/nz-plaxi-ifade.jpg",cap:"Plaxi, ifade sayfası"},
+      {img:"img/nz-mekan-vadi.jpg",cap:"Cleanua Kristal Vadisi"},{img:"img/nz-mekan-atolye.jpg",cap:"Sabun Enerji Atölyesi"},
+      {img:"img/nz-mekan-mikrobikya.jpg",cap:"Mikrobikya, bozulmuş bölge"},{img:"img/nz-mekan-portal.jpg",cap:"Portal Odası"}] },
+  { id:"masa-ustu", title:"Masa Üstü", kind:"3D sahne · Animasyon", thumb:"img/kapak-masa.jpg",
+    text:"Ahşap bir masanın üzerinde kısa bir an: zıplayan top yerine oturuyor, solucan tabağın içinden başını kaldırıyor. Yansıtıcı yüzey ve ahşap doku üzerine kurulmuş küçük bir sahne.",
+    meta:[["Kapsam","Modelleme, malzeme, animasyon"],["Tür","Ders projesi"]],
+    media:[{video:"media/masa-ustu.mp4",cap:"Animasyon"},{img:"img/masa-ustu-render.jpg",cap:"Final render"}] },
+  { id:"ofis", title:"Ofis", kind:"Layout · Kamera", thumb:"img/kapak-ofis.jpg",
+    text:"Masasında oturan bir karakter ve çevresindeki ofis. Bu çalışma layout aşamasıdır: mekân yerleşimi, karakterin konumu ve kamera hareketi planlandı.",
+    meta:[["Kapsam","Layout, sahne yerleşimi, kamera"],["Tür","Ders projesi"]],
+    media:[{video:"media/ofis-layout.mp4",cap:"Layout playblast",full:true}] },
+  { id:"insan-modeli", title:"İnsan Modeli", kind:"Dijital heykel · Anatomi", thumb:"img/kapak-insan.jpg",
+    text:"ZBrush'ta yontulmuş, ana kas gruplarının çalışıldığı A-poz bir insan figürü. Rig ve animasyon için temel model olarak hazırlandı.",
+    meta:[["Program","ZBrush"],["Kapsam","Anatomi, form, topoloji hazırlığı"],["Tür","Ders projesi"]],
+    media:[{img:"img/insan-modeli.jpg",cap:"ZBrush görünümü",full:true}] },
+  { id:"animasyon", title:"Animasyon Denemeleri", kind:"Karakter animasyonu · Fizik", thumb:"img/kapak-animasyon.jpg",
+    text:"Zamanlama ve ağırlık üzerine kısa çalışmalar. Salıncakta sallanan bir figür ivme kazanıp düşüyor; robot denemesinde halka ve top arasındaki ritim çalışıldı.",
+    meta:[["Kapsam","Zamanlama, ağırlık, döngü"],["Tür","Ders çalışmaları"]],
+    media:[{video:"media/salincak.mp4",cap:"Salıncak"},{video:"media/robot.mp4",cap:"Robot"}] },
+  { id:"sosyal-medya", title:"Sosyal Medya Tasarımları", kind:"Grafik tasarım · Travelsup", thumb:"img/kapak-sosyal.jpg", wide:true,
+    text:"B2B turizm platformu Travelsup için hazırlanan Instagram gönderileri. Destinasyon, otel ve operasyon hizmetleri için ortak bir marka dilinde, her şehre kendi tipografik karakteri verilerek tasarlandı.",
+    meta:[["Müşteri","Travelsup"],["Kapsam","Sosyal medya gönderi tasarımı"],["Format","4:5 Instagram gönderisi"]],
+    posts:true,
+    media:Array.from({length:12},(_,i)=>({img:`img/sosyal-${String(i+1).padStart(2,"0")}.jpg`,cap:""})) }
+];
+
+const grid=document.getElementById("grid");
+grid.innerHTML=P.map(p=>`<a class="card" href="#${p.id}">
+  <div class="thumb"><img src="${p.thumb}" alt="${p.title} kapak görseli" loading="lazy"></div>
+  <div><h3>${p.title}</h3><div class="meta">${p.kind}</div></div></a>`).join("");
+
+const body=document.getElementById("project-body");
+function render(){
+  const id=location.hash.slice(1);
+  const i=P.findIndex(p=>p.id===id);
+  if(i<0){
+    document.body.classList.remove("viewing");
+    if(id){const el=document.getElementById(id); if(el) el.scrollIntoView();}
+    return;
+  }
+  const p=P[i], n=P[(i+1)%P.length];
+  body.innerHTML=`<a class="back" href="#isler">← Tüm işler</a>
+   <div class="p-head"><div><div class="eyebrow">${p.kind}</div><h1>${p.title}</h1></div>
+   <div><p>${p.text}</p><dl class="p-meta">${p.meta.map(([k,v])=>`<dt>${k}</dt><dd>${v}</dd>`).join("")}</dl>${p.note?`<div class="note">${p.note}</div>`:""}</div></div>
+   <div class="media${p.posts?" posts":""}">${p.media.map(m=>`<figure class="${m.full?"full":""}">${m.video
+     ?`<video src="${m.video}" controls muted loop playsinline preload="metadata"></video>`
+     :`<button type="button" data-src="${m.img}" aria-label="${m.cap||p.title} görselini büyüt"><img src="${m.img}" alt="${m.cap||p.title}" loading="lazy"></button>`}${m.cap?`<figcaption>${m.cap}</figcaption>`:""}</figure>`).join("")}</div>
+   <div class="next"><a href="#isler"><span class="k">Geri</span><span class="t">Tüm işler</span></a>
+   <a href="#${n.id}" style="text-align:right"><span class="k">Sonraki iş</span><span class="t">${n.title} →</span></a></div>`;
+  document.body.classList.add("viewing");
+  window.scrollTo(0,0);
+}
+addEventListener("hashchange",render); render();
+
+const lb=document.getElementById("lightbox"), lbi=document.getElementById("lb-img");
+body.addEventListener("click",e=>{const b=e.target.closest("button[data-src]"); if(!b) return; lbi.src=b.dataset.src; lbi.alt=b.getAttribute("aria-label"); try{lb.showModal()}catch(_){}});
+document.getElementById("lb-close").onclick=()=>lb.close();
+lb.addEventListener("click",e=>{if(e.target===lb) lb.close();});
+
+document.getElementById("copy").addEventListener("click",async()=>{
+  const s=document.getElementById("copied");
+  try{await navigator.clipboard.writeText("designed.furkan@gmail.com"); s.textContent="E-posta adresi kopyalandı.";}
+  catch(_){s.textContent="Kopyalanamadı. Adresi seçip kopyalayabilirsiniz.";}
+});
+</script>
+</body>
+</html>
